@@ -53,3 +53,9 @@ resource "google_bigquery_table" "vitals_readings" {
 
   range_partitioning = null
 }
+
+resource "google_secret_manager_secret_iam_member" "secret_accessor" {
+  secret_id = google_secret_manager_secret.alert_api_key.id
+  role      = "roles/secretmanager.secretAccessor"
+  member    = "serviceAccount:${google_service_account.vitalbridge_workload.email}"
+}
