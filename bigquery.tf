@@ -52,4 +52,7 @@ resource "google_bigquery_table" "vitals_readings" {
   }
 
   range_partitioning = null
+  encryption_configuration {
+    kms_key_name = google_kms_crypto_key.phi_key.id
+  }
 }
